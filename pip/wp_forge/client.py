@@ -10,7 +10,7 @@ from PyQt6.QtCore import Qt # type: ignore
 from wp_forge.script import WallpaperForge, load_config, CONFIG_PATH
 
 class GalleryWidget(QWidget):
-    # initalizes the whole application 
+    # initalizes the whole application
     def __init__(self, parent):
         super().__init__()
         self.parent = parent
@@ -71,7 +71,7 @@ class GalleryWidget(QWidget):
             border-radius: 6px;
             margin: 6px;
         """)
-
+        
         item_layout = QVBoxLayout(item_widget)
         item_layout.setContentsMargins(10, 10, 10, 10)
         item_layout.setSpacing(8)
@@ -641,7 +641,7 @@ class WallpaperApp(QMainWindow):
         filters_layout.addWidget(scroll_area)
         filters_tab.setLayout(filters_layout)
 
-    # resets all filters to their default values 
+    # resets all filters to their default values
     def resetAllFilters(self):
         filter_defaults = {
             "brightness": 100,

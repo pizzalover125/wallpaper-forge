@@ -1,0 +1,3 @@
+[console_scripts]
+wp-forge = wp_forge.client:main
+wp-forge-script = wp_forge.script:main

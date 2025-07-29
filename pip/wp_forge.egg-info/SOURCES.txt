@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+wp_forge/__init__.py
+wp_forge/backgrounds.json
+wp_forge/client.py
+wp_forge/icon.png
+wp_forge/script.py
+wp_forge.egg-info/PKG-INFO
+wp_forge.egg-info/SOURCES.txt
+wp_forge.egg-info/dependency_links.txt
+wp_forge.egg-info/entry_points.txt
+wp_forge.egg-info/requires.txt
+wp_forge.egg-info/top_level.txt

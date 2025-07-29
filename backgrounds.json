@@ -1,0 +1,73 @@
+[
+  {
+    "name": "Nature Landscape",
+    "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=3840&h=2160&fit=crop",
+    "description": "Beautiful mountain landscape"
+  },
+
+  {
+    "name": "Ocean Sunset",
+    "url": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=3840&h=2160&fit=crop",
+    "description": "Stunning ocean sunset view"
+  },
+
+  {
+    "name": "Forest Path",
+    "url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=3840&h=2160&fit=crop",
+    "description": "Peaceful forest walking path"
+  },
+
+  {
+    "name": "City Skyline",
+    "url": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=3840&h=2160&fit=crop",
+    "description": "Modern city skyline at dusk"
+  },
+
+  {
+    "name": "Desert Dunes",
+    "url": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=3840&h=2160&fit=crop",
+    "description": "Sahara desert sand dunes"
+  },
+
+  {
+    "name": "Northern Lights",
+    "url": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=3840&h=2160&fit=crop",
+    "description": "Aurora borealis over snowy landscape"
+  },
+
+  {
+    "name": "Minimalist Abstract",
+    "url": "https://images.unsplash.com/photo-1557683316-973673baf926?w=3840&h=2160&fit=crop",
+    "description": "Clean abstract geometric design"
+  },
+
+  {
+    "name": "Tropical Beach",
+    "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=3840&h=2160&fit=crop",
+    "description": "Paradise tropical beach scene"
+  },
+
+  {
+    "name": "Matrix Code",
+    "url": "https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=3840&h=2160&fit=crop",
+    "description": "Falling green characters, matrix-style"
+  },
+
+  {
+    "name": "Developer's Code",
+    "url": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=3840&h=2160&fit=crop",
+    "description": "Close-up of HTML code on a screen"
+  },
+
+  {
+    "name": "Hacker's Desk",
+    "url": "https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=3840&h=2160&fit=crop",
+    "description": "A dark desk with multiple computers and tech"
+  },
+
+  {
+    "name": "Circuit Board",
+    "url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=3840&h=2160&fit=crop",
+    "description": "Cyber-themed image of a motherboard"
+  }
+]

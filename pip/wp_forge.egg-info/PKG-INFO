@@ -1,0 +1,144 @@
+Metadata-Version: 2.4
+Name: wp-forge
+Version: 1.1.1
+Summary: Wallpapers are boring. Not anymore.
+Author-email: pizzalover125 <chessthinker600@gmail.com>
+Project-URL: github, https://github.com/pizzalover125/wallpaper-forge
+Requires-Python: <3.13,>=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: aiohappyeyeballs==2.6.1
+Requires-Dist: aiohttp==3.12.13
+Requires-Dist: aiosignal==1.3.2
+Requires-Dist: alembic==1.14.1
+Requires-Dist: altgraph==0.17.4
+Requires-Dist: annotated-types==0.7.0
+Requires-Dist: anyio==4.9.0
+Requires-Dist: appdirs==1.4.4
+Requires-Dist: attrs==25.3.0
+Requires-Dist: beautifulsoup4==4.13.4
+Requires-Dist: blinker==1.9.0
+Requires-Dist: bs4==0.0.2
+Requires-Dist: build==1.2.2.post1
+Requires-Dist: cachelib==0.13.0
+Requires-Dist: certifi==2025.1.31
+Requires-Dist: cffi==1.17.1
+Requires-Dist: charset-normalizer==3.4.1
+Requires-Dist: circup==2.2.2
+Requires-Dist: click==8.1.8
+Requires-Dist: cryptography==44.0.2
+Requires-Dist: Deprecated==1.2.18
+Requires-Dist: deprecation==2.1.0
+Requires-Dist: docutils==0.21.2
+Requires-Dist: easyeda2kicad==0.8.0
+Requires-Dist: Flask==3.0.0
+Requires-Dist: Flask-Assets==2.1.0
+Requires-Dist: flask-cors==6.0.1
+Requires-Dist: Flask-Login==0.6.3
+Requires-Dist: Flask-Migrate==4.1.0
+Requires-Dist: Flask-Session==0.8.0
+Requires-Dist: Flask-SQLAlchemy==3.1.1
+Requires-Dist: frozenlist==1.7.0
+Requires-Dist: glyph_media==0.0.1
+Requires-Dist: glyphsh==1.2.0
+Requires-Dist: gotrue==2.12.2
+Requires-Dist: gunicorn==23.0.0
+Requires-Dist: h11==0.16.0
+Requires-Dist: h2==4.2.0
+Requires-Dist: hpack==4.1.0
+Requires-Dist: httpcore==1.0.9
+Requires-Dist: httpx==0.28.1
+Requires-Dist: hyperframe==6.1.0
+Requires-Dist: id==1.5.0
+Requires-Dist: idna==3.10
+Requires-Dist: iniconfig==2.1.0
+Requires-Dist: itsdangerous==2.2.0
+Requires-Dist: jaraco.classes==3.4.0
+Requires-Dist: jaraco.context==6.0.1
+Requires-Dist: jaraco.functools==4.2.1
+Requires-Dist: Jinja2==3.1.5
+Requires-Dist: keyring==25.6.0
+Requires-Dist: linkify-it-py==2.0.3
+Requires-Dist: macholib==1.16.3
+Requires-Dist: Mako==1.3.9
+Requires-Dist: markdown-it-py==3.0.0
+Requires-Dist: MarkupSafe==3.0.2
+Requires-Dist: mdit-py-plugins==0.4.2
+Requires-Dist: mdurl==0.1.2
+Requires-Dist: modulegraph==0.19.6
+Requires-Dist: more-itertools==10.7.0
+Requires-Dist: msgspec==0.19.0
+Requires-Dist: multidict==6.5.1
+Requires-Dist: nh3==0.2.21
+Requires-Dist: numpy==2.3.2
+Requires-Dist: packaging==25.0
+Requires-Dist: pillow==11.3.0
+Requires-Dist: platformdirs==4.3.8
+Requires-Dist: pluggy==1.6.0
+Requires-Dist: postgrest==1.1.1
+Requires-Dist: prompt_toolkit==3.0.51
+Requires-Dist: propcache==0.3.2
+Requires-Dist: psycopg2-binary==2.9.9
+Requires-Dist: py2app==0.28.8
+Requires-Dist: pycparser==2.22
+Requires-Dist: pydantic==2.11.5
+Requires-Dist: pydantic_core==2.33.2
+Requires-Dist: PyGithub==2.1.1
+Requires-Dist: Pygments==2.19.2
+Requires-Dist: PyJWT==2.10.1
+Requires-Dist: PyNaCl==1.5.0
+Requires-Dist: pyproject_hooks==1.2.0
+Requires-Dist: PyQt6==6.9.1
+Requires-Dist: PyQt6-Qt6==6.9.1
+Requires-Dist: PyQt6_sip==13.10.2
+Requires-Dist: pytest==8.4.1
+Requires-Dist: pytest-mock==3.14.1
+Requires-Dist: python-dateutil==2.9.0.post0
+Requires-Dist: python-dotenv==1.0.0
+Requires-Dist: questionary==2.1.0
+Requires-Dist: readme_renderer==44.0
+Requires-Dist: realtime==2.5.2
+Requires-Dist: requests==2.31.0
+Requires-Dist: requests-toolbelt==1.0.0
+Requires-Dist: rfc3986==2.0.0
+Requires-Dist: rich==14.0.0
+Requires-Dist: semver==3.0.4
+Requires-Dist: setuptools==80.9.0
+Requires-Dist: six==1.17.0
+Requires-Dist: slack-sdk==3.26.1
+Requires-Dist: slugify==0.0.1
+Requires-Dist: sniffio==1.3.1
+Requires-Dist: soupsieve==2.7
+Requires-Dist: SQLAlchemy==2.0.38
+Requires-Dist: storage3==0.12.0
+Requires-Dist: StrEnum==0.4.15
+Requires-Dist: supabase==2.16.0
+Requires-Dist: supafunc==0.10.1
+Requires-Dist: textual==3.5.0
+Requires-Dist: textualize==0.1
+Requires-Dist: toml==0.10.2
+Requires-Dist: twine==6.1.0
+Requires-Dist: typing-inspection==0.4.1
+Requires-Dist: typing_extensions==4.14.0
+Requires-Dist: uc-micro-py==1.0.3
+Requires-Dist: update-checker==0.18.0
+Requires-Dist: urllib3==2.3.0
+Requires-Dist: wcwidth==0.2.13
+Requires-Dist: webassets==2.0
+Requires-Dist: websockets==15.0.1
+Requires-Dist: Werkzeug==3.1.3
+Requires-Dist: wheel==0.45.1
+Requires-Dist: wrapt==1.17.2
+Requires-Dist: yarl==1.20.1
+Dynamic: license-file
+
+# Wallpaper Forge
+
+Wallpapers are boring. Not anymore.
+
+Features:
+
+- Weather, Time, and Quote widgets
+- Image filters
+- Available on Windows, macOS, and Linux
+- Gallery with awesome images
