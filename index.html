@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wallpaper Forge - Cross-Platform Wallpaper Configurator</title>
+    <style>
+      :root {
+        /* Light mode colors */
+        --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --bg-secondary: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.05) 0%,
+          rgba(255, 255, 255, 0.02) 100%
+        );
+        --text-primary: white;
+        --text-secondary: rgba(255, 255, 255, 0.9);
+        --text-muted: rgba(255, 255, 255, 0.7);
+        --card-bg: rgba(255, 255, 255, 0.1);
+        --card-border: rgba(255, 255, 255, 0.2);
+        --command-bg: rgba(0, 0, 0, 0.3);
+        --command-border: rgba(255, 255, 255, 0.3);
+        --button-bg: rgba(255, 255, 255, 0.1);
+        --button-hover: rgba(255, 255, 255, 0.2);
+        --footer-border: rgba(255, 255, 255, 0.1);
+        --grid-pattern: rgba(255, 255, 255, 0.1);
+      }
+
+      [data-theme="dark"] {
+        /* Dark mode colors */
+        --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        --bg-secondary: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.2) 0%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
+        --text-primary: #e2e8f0;
+        --text-secondary: rgba(226, 232, 240, 0.9);
+        --text-muted: rgba(226, 232, 240, 0.6);
+        --card-bg: rgba(0, 0, 0, 0.3);
+        --card-border: rgba(255, 255, 255, 0.1);
+        --command-bg: rgba(0, 0, 0, 0.6);
+        --command-border: rgba(255, 255, 255, 0.2);
+        --button-bg: rgba(0, 0, 0, 0.2);
+        --button-hover: rgba(0, 0, 0, 0.4);
+        --footer-border: rgba(255, 255, 255, 0.05);
+        --grid-pattern: rgba(255, 255, 255, 0.05);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        overflow-x: hidden;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        padding: 20px 0;
+        position: relative;
+        z-index: 100;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: linear-gradient(45deg, var(--text-primary), #e0e7ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        color: var(--text-primary);
+        transform: translateY(-2px);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--text-primary);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* Dark Mode Toggle */
+      .theme-toggle {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        padding: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .theme-toggle:hover {
+        background: var(--button-hover);
+        transform: translateY(-1px);
+      }
+
+      .theme-icon {
+        width: 20px;
+        height: 20px;
+        transition: all 0.3s ease;
+        fill: var(--text-secondary);
+      }
+
+      .theme-toggle:hover .theme-icon {
+        fill: var(--text-primary);
+      }
+
+      .theme-text {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        transition: color 0.3s ease;
+      }
+
+      .theme-toggle:hover .theme-text {
+        color: var(--text-primary);
+      }
+
+      .hero {
+        padding: 120px 0;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.3;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: 800;
+        margin-bottom: 20px;
+        background: linear-gradient(
+          45deg,
+          var(--text-primary),
+          #f0f9ff,
+          #e0e7ff
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.1;
+        animation: slideUp 1s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 40px;
+        color: var(--text-secondary);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+        animation: slideUp 1s ease-out 0.2s both;
+      }
+
+      .install-section-hero {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        padding: 30px;
+        margin: 50px auto;
+        max-width: 600px;
+        animation: slideUp 1s ease-out 0.4s both;
+        transition: all 0.3s ease;
+      }
+
+      .install-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        text-align: center;
+        color: var(--text-primary);
+      }
+
+      .install-command {
+        background: var(--command-bg);
+        border: 1px solid var(--command-border);
+        border-radius: 12px;
+        padding: 20px;
+        font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+        font-size: 1.2rem;
+        color: #00ff88;
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .install-command:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .install-command::before {
+        content: "$ ";
+        color: #ff6b6b;
+      }
+
+      .copy-btn {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--button-bg);
+        border: none;
+        color: var(--text-primary);
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      .copy-btn:hover {
+        background: var(--button-hover);
+      }
+
+      .screenshots-section {
+        padding: 100px 0;
+        background: var(--bg-secondary);
+        transition: background 0.3s ease;
+      }
+
+      .screenshots-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 60px;
+        margin-top: 40px;
+      }
+
+      .screenshot-card {
+        text-align: center;
+      }
+
+      .screenshot-card h3 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: var(--text-secondary);
+      }
+
+      .screenshot-frame {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        padding: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .screenshot-frame:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .screenshot-image {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .cta-section {
+        padding: 100px 0;
+        text-align: center;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        color: white;
+        padding: 18px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+        transition: left 0.3s ease;
+        z-index: -1;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      }
+
+      .cta-button:hover::before {
+        left: 0;
+      }
+
+      footer {
+        padding: 40px 0;
+        text-align: center;
+        border-top: 1px solid var(--footer-border);
+        color: var(--text-muted);
+        transition: all 0.3s ease;
+      }
+
+      .platforms {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin: 40px 0;
+        flex-wrap: wrap;
+      }
+
+      .platform {
+        background: var(--card-bg);
+        padding: 15px 25px;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border: 1px solid var(--card-border);
+        transition: all 0.3s ease;
+        color: var(--text-secondary);
+      }
+
+      .platform:hover {
+        background: var(--button-hover);
+        transform: translateY(-2px);
+        color: var(--text-primary);
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .nav-right {
+          gap: 15px;
+        }
+
+        .theme-text {
+          display: none;
+        }
+
+        .hero {
+          padding: 80px 0;
+        }
+
+        .install-command {
+          font-size: 1rem;
+          padding: 15px;
+        }
+
+        .copy-btn {
+          position: static;
+          transform: none;
+          margin-top: 15px;
+          display: block;
+          width: 100%;
+        }
+
+        .platforms {
+          gap: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="container">
+        <div class="logo">Wallpaper Forge</div>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="https://pypi.org/project/wp-forge/">Install</a></li>
+            <li>
+              <a href="https://github.com/pizzalover125/wallpaper-forge"
+                >GitHub</a
+              >
+            </li>
+          </ul>
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <svg
+              class="theme-icon sun-icon"
+              viewBox="0 0 24 24"
+              style="display: block"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+            <svg
+              class="theme-icon moon-icon"
+              viewBox="0 0 24 24"
+              style="display: none"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            <span class="theme-text">Light</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <h1>Wallpaper Forge</h1>
+            <p>
+              Wallpapers are boring. Not anymore. Generate smart wallpapers with
+              ease.
+            </p>
+
+            <div class="platforms">
+              <span class="platform">Windows</span>
+              <span class="platform">macOS</span>
+              <span class="platform">Linux</span>
+            </div>
+
+            <div class="install-section-hero">
+              <h2 class="install-title">Get Started in Seconds</h2>
+              <div
+                class="install-command"
+                onclick="copyToClipboard('pip install wp-forge')"
+              >
+                pip install wp-forge
+                <button
+                  class="copy-btn"
+                  onclick="event.stopPropagation(); copyToClipboard('pip install wp-forge')"
+                >
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screenshots-section" id="screenshots">
+        <div class="container">
+          <div class="screenshots-grid">
+            <div class="screenshot-card">
+              <h3>macOS</h3>
+              <div class="screenshot-frame macos">
+                <img
+                  src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/6143ff51fa7f4f5cc21a3e735147f410732f6f9c_image.png"
+                  alt="Wallpaper Forge on macOS"
+                  class="screenshot-image"
+                />
+              </div>
+            </div>
+
+            <div class="screenshot-card">
+              <h3>Windows</h3>
+              <div class="screenshot-frame windows">
+                <img
+                  src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/30eb8d6a3e6cf977a4d446fc46c41f5d90ecbdda_image.png"
+                  alt="Wallpaper Forge on Windows"
+                  class="screenshot-image"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>Made with ❤️ by pizzalover125.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Theme management
+      function getTheme() {
+        return localStorage.getItem("theme") || "light";
+      }
+
+      function setTheme(theme) {
+        localStorage.setItem("theme", theme);
+        document.documentElement.setAttribute("data-theme", theme);
+        updateThemeButton(theme);
+      }
+
+      function updateThemeButton(theme) {
+        const sunIcon = document.querySelector(".sun-icon");
+        const moonIcon = document.querySelector(".moon-icon");
+        const themeText = document.querySelector(".theme-text");
+
+        if (theme === "dark") {
+          sunIcon.style.display = "none";
+          moonIcon.style.display = "block";
+          themeText.textContent = "Dark";
+        } else {
+          sunIcon.style.display = "block";
+          moonIcon.style.display = "none";
+          themeText.textContent = "Light";
+        }
+      }
+
+      function toggleTheme() {
+        const currentTheme = getTheme();
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+        setTheme(newTheme);
+      }
+
+      // Initialize theme on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        const savedTheme = getTheme();
+        setTheme(savedTheme);
+      });
+
+      function copyToClipboard(text) {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            const btn = event.target
+              .closest(".install-command")
+              .querySelector(".copy-btn");
+            const originalText = btn.textContent;
+            btn.textContent = "Copied!";
+            btn.style.background = "rgba(0, 255, 136, 0.2)";
+
+            setTimeout(() => {
+              btn.textContent = originalText;
+              btn.style.background = "var(--button-bg)";
+            }, 2000);
+          })
+          .catch(() => {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+
+            const btn = event.target
+              .closest(".install-command")
+              .querySelector(".copy-btn");
+            const originalText = btn.textContent;
+            btn.textContent = "Copied!";
+            setTimeout(() => {
+              btn.textContent = originalText;
+            }, 2000);
+          });
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".feature-card").forEach((card, index) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+        card.style.transition = `opacity 0.6s ease ${
+          index * 0.1
+        }s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(card);
+      });
+    </script>
+  </body>
+</html>
